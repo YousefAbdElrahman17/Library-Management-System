@@ -4,17 +4,19 @@ import java.util.Scanner;
 
 public class Main{
 
-    static Scanner regSelect;
+    static Scanner registerSelect;
 
     public static void main(String[] args){
-        System.out.println("test");
 
-        System.out.println("""
-                Holaaa!\n
-                (1) login\n
-                 (2) New User""");
-        regSelect = new Scanner(System.in);
-        int num = regSelect.nextInt();                  // convert input(regSelect) to Int and store it in "num"
+        Database database = new Database();
+
+        System.out.print("""
+                Holaaa!
+                (1) login 
+                (2) New User
+                : """);
+        registerSelect = new Scanner(System.in);
+        int num = registerSelect.nextInt();                  // convert input(regSelect) to Int and store it in "num"
         switch(num){
             case 1: login();   break;
             case 2: newUser(); break;
@@ -27,31 +29,36 @@ public class Main{
 
 
 
-        regSelect.close();
+        registerSelect.close();
     }
 
 
     private static void login(){
-        System.out.println("Enter Phone number: ");
-        String phoneNum = regSelect.next();
-        System.out.println("Enter Email: ");
-        String email = regSelect.next();
+        System.out.print("Enter Phone number: ");
+        String phoneNum = registerSelect.next();
+        System.out.print("Enter Email: ");
+        String email = registerSelect.next();
 
     }
     private static void newUser(){
-        System.out.println("Enter Name: ");
-        String name = regSelect.next();
-        System.out.println("Enter Phone number: ");
-        String phoneNum = regSelect.next();
-        System.out.println("Enter Email: ");
-        String email = regSelect.next();
-        System.out.println("""
-                (1) Admin\n
+        System.out.print("Enter Name: ");
+        String name = registerSelect.next();
+        System.out.print("Enter Phone number: ");
+        String phoneNum = registerSelect.next();
+        System.out.print("Enter Email: ");
+        String email = registerSelect.next();
+        System.out.print("""
+                (1) Admin
                 (2) Normal user
-                """);
-
+                : """);
+        int n2 = registerSelect.nextInt();
+        if (n2==1){
+            User admin = new Admin(name, email, phoneNum);
+        }
+        else{
+            User user = new NormalUser(name, email, phoneNum);
+        }
     }
-
 
 
 
